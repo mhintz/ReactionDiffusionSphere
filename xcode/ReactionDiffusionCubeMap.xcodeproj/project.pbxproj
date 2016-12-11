@@ -16,22 +16,22 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
-		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
-		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		3196AABD062B4271B50CB277 /* NoiseWalker.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */; };
-		27917EA6A1D34D50B8CD4C5C /* Node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 46A774CACE13470A8D6158FE /* Node.hpp */; };
-		C47EF9CC9A9A422DAB1E088A /* MeshHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */; };
-		0B0A7D605975420EBBFDB274 /* MeshHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = C140E45669AC497DBBD707DA /* MeshHelpers.h */; };
-		B1B2D3A4DE1941DB82B68EFC /* Item.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C81700BE4A04EBD8646029B /* Item.hpp */; };
-		A4F647B7772F4425A1B3D6FF /* Gradient.hpp in Sources */ = {isa = PBXBuildFile; fileRef = C1F86EEE489C4894B25B6996 /* Gradient.hpp */; };
-		9AC3C769B50943469B87D231 /* GeomEater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BE32B97124DF98D89A114 /* GeomEater.cpp */; };
-		CC451A94363D40C0866E3E76 /* GeomEater.h in Headers */ = {isa = PBXBuildFile; fileRef = F84357BFA8D24973AE5D2A20 /* GeomEater.h */; };
-		CF2D8F5038024DF78467F7CD /* CoreMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */; };
-		9F9E2E6D469F40A09A0A76FC /* CoreMath.h in Headers */ = {isa = PBXBuildFile; fileRef = D0CC7BB0C40148329629F3C5 /* CoreMath.h */; };
-		2A2C661E31054527A9DB61E8 /* ReactionDiffusionCubeMap_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 7B2523B5E0C747B29105BDDE /* ReactionDiffusionCubeMap_Prefix.pch */; };
-		61EAC96DD0244D64A69E5198 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 70B9D1041DC241299490E0AE /* CinderApp.icns */; };
-		8489F8DBE15C40BD97A5AE63 /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = D7DB8DB7964249F6893BD7E5 /* Resources.h */; };
 		18308C46C7F6488FBD64266F /* ReactionDiffusionCubeMapApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D5055ED659649B4AB733418 /* ReactionDiffusionCubeMapApp.cpp */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		61EAC96DD0244D64A69E5198 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 70B9D1041DC241299490E0AE /* CinderApp.icns */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9AC3C769B50943469B87D231 /* GeomEater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BE32B97124DF98D89A114 /* GeomEater.cpp */; };
+		A4F647B7772F4425A1B3D6FF /* Gradient.hpp in Sources */ = {isa = PBXBuildFile; fileRef = C1F86EEE489C4894B25B6996 /* Gradient.hpp */; };
+		B1B2D3A4DE1941DB82B68EFC /* Item.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C81700BE4A04EBD8646029B /* Item.hpp */; };
+		C47EF9CC9A9A422DAB1E088A /* MeshHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */; };
+		CF2D8F5038024DF78467F7CD /* CoreMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */; };
+		EF7E4EC61DFDBD5600AE6B47 /* f_reactionDiffusion.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EC31DFDBD5600AE6B47 /* f_reactionDiffusion.glsl */; };
+		EF7E4EC71DFDBD5600AE6B47 /* f_renderGrid.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EC41DFDBD5600AE6B47 /* f_renderGrid.glsl */; };
+		EF7E4EC81DFDBD5600AE6B47 /* v_passThrough.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EC51DFDBD5600AE6B47 /* v_passThrough.glsl */; };
+		EF7E4EDA1DFDBD7C00AE6B47 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ECF1DFDBD7C00AE6B47 /* Mesh.cpp */; };
+		EF7E4EDB1DFDBD7C00AE6B47 /* MeshBuilds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED11DFDBD7C00AE6B47 /* MeshBuilds.cpp */; };
+		EF7E4EDC1DFDBD7C00AE6B47 /* MeshGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED31DFDBD7C00AE6B47 /* MeshGroup.cpp */; };
+		EF7E4EDD1DFDBD7C00AE6B47 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED61DFDBD7C00AE6B47 /* Vertex.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,23 +47,36 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2D5055ED659649B4AB733418 /* ReactionDiffusionCubeMapApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ReactionDiffusionCubeMapApp.cpp; path = ../src/ReactionDiffusionCubeMapApp.cpp; sourceTree = "<group>"; };
+		46A774CACE13470A8D6158FE /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Node.hpp; path = "../../../../Code/cinder/blocks/core-util/Node.hpp"; sourceTree = "<group>"; };
+		4C2BE32B97124DF98D89A114 /* GeomEater.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = GeomEater.cpp; path = "../../../../Code/cinder/blocks/core-util/GeomEater.cpp"; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		70B9D1041DC241299490E0AE /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+		7B2523B5E0C747B29105BDDE /* ReactionDiffusionCubeMap_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ReactionDiffusionCubeMap_Prefix.pch; sourceTree = "<group>"; };
+		86858DF6CAD143D2AC68A5AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C81700BE4A04EBD8646029B /* Item.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Item.hpp; path = "../../../../Code/cinder/blocks/core-util/Item.hpp"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* ReactionDiffusionCubeMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactionDiffusionCubeMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D5055ED659649B4AB733418 /* ReactionDiffusionCubeMapApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/ReactionDiffusionCubeMapApp.cpp; sourceTree = "<group>"; name = ReactionDiffusionCubeMapApp.cpp; };
-		D7DB8DB7964249F6893BD7E5 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
-		70B9D1041DC241299490E0AE /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
-		86858DF6CAD143D2AC68A5AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
-		7B2523B5E0C747B29105BDDE /* ReactionDiffusionCubeMap_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ReactionDiffusionCubeMap_Prefix.pch; sourceTree = "<group>"; name = ReactionDiffusionCubeMap_Prefix.pch; };
-		D0CC7BB0C40148329629F3C5 /* CoreMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../Code/cinder/blocks/core-util/CoreMath.h"; sourceTree = "<group>"; name = CoreMath.h; };
-		A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../Code/cinder/blocks/core-util/CoreMath.cpp"; sourceTree = "<group>"; name = CoreMath.cpp; };
-		F84357BFA8D24973AE5D2A20 /* GeomEater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../Code/cinder/blocks/core-util/GeomEater.h"; sourceTree = "<group>"; name = GeomEater.h; };
-		4C2BE32B97124DF98D89A114 /* GeomEater.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../Code/cinder/blocks/core-util/GeomEater.cpp"; sourceTree = "<group>"; name = GeomEater.cpp; };
-		C1F86EEE489C4894B25B6996 /* Gradient.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/Gradient.hpp"; sourceTree = "<group>"; name = Gradient.hpp; };
-		8C81700BE4A04EBD8646029B /* Item.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/Item.hpp"; sourceTree = "<group>"; name = Item.hpp; };
-		C140E45669AC497DBBD707DA /* MeshHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../Code/cinder/blocks/core-util/MeshHelpers.h"; sourceTree = "<group>"; name = MeshHelpers.h; };
-		D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../Code/cinder/blocks/core-util/MeshHelpers.cpp"; sourceTree = "<group>"; name = MeshHelpers.cpp; };
-		46A774CACE13470A8D6158FE /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/Node.hpp"; sourceTree = "<group>"; name = Node.hpp; };
-		A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/NoiseWalker.hpp"; sourceTree = "<group>"; name = NoiseWalker.hpp; };
+		A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = NoiseWalker.hpp; path = "../../../../Code/cinder/blocks/core-util/NoiseWalker.hpp"; sourceTree = "<group>"; };
+		A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CoreMath.cpp; path = "../../../../Code/cinder/blocks/core-util/CoreMath.cpp"; sourceTree = "<group>"; };
+		C140E45669AC497DBBD707DA /* MeshHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MeshHelpers.h; path = "../../../../Code/cinder/blocks/core-util/MeshHelpers.h"; sourceTree = "<group>"; };
+		C1F86EEE489C4894B25B6996 /* Gradient.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Gradient.hpp; path = "../../../../Code/cinder/blocks/core-util/Gradient.hpp"; sourceTree = "<group>"; };
+		D0CC7BB0C40148329629F3C5 /* CoreMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CoreMath.h; path = "../../../../Code/cinder/blocks/core-util/CoreMath.h"; sourceTree = "<group>"; };
+		D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = MeshHelpers.cpp; path = "../../../../Code/cinder/blocks/core-util/MeshHelpers.cpp"; sourceTree = "<group>"; };
+		D7DB8DB7964249F6893BD7E5 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		EF7E4EC31DFDBD5600AE6B47 /* f_reactionDiffusion.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = f_reactionDiffusion.glsl; sourceTree = "<group>"; };
+		EF7E4EC41DFDBD5600AE6B47 /* f_renderGrid.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = f_renderGrid.glsl; sourceTree = "<group>"; };
+		EF7E4EC51DFDBD5600AE6B47 /* v_passThrough.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = v_passThrough.glsl; sourceTree = "<group>"; };
+		EF7E4ECC1DFDBD7C00AE6B47 /* buildmesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildmesh.h; sourceTree = "<group>"; };
+		EF7E4ECE1DFDBD7C00AE6B47 /* MathBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathBase.h; sourceTree = "<group>"; };
+		EF7E4ECF1DFDBD7C00AE6B47 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		EF7E4ED01DFDBD7C00AE6B47 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		EF7E4ED11DFDBD7C00AE6B47 /* MeshBuilds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshBuilds.cpp; sourceTree = "<group>"; };
+		EF7E4ED21DFDBD7C00AE6B47 /* MeshBuilds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshBuilds.h; sourceTree = "<group>"; };
+		EF7E4ED31DFDBD7C00AE6B47 /* MeshGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshGroup.cpp; sourceTree = "<group>"; };
+		EF7E4ED41DFDBD7C00AE6B47 /* MeshGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshGroup.h; sourceTree = "<group>"; };
+		EF7E4ED61DFDBD7C00AE6B47 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
+		EF7E4ED71DFDBD7C00AE6B47 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		F84357BFA8D24973AE5D2A20 /* GeomEater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeomEater.h; path = "../../../../Code/cinder/blocks/core-util/GeomEater.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +101,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				EF7E4EC91DFDBD7C00AE6B47 /* buildmesh */,
+				BB480A83CF864399952EF5CD /* core-util */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +156,7 @@
 		29B97314FDCFA39411CA2CEA /* ReactionDiffusionCubeMap */ = {
 			isa = PBXGroup;
 			children = (
+				EF7E4EBA1DFDBD1500AE6B47 /* assets */,
 				01B97315FEAEA392516A2CEA /* Blocks */,
 				29B97315FDCFA39411CA2CEA /* Headers */,
 				080E96DDFE201D6D7F000001 /* Source */,
@@ -142,31 +165,6 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = ReactionDiffusionCubeMap;
-			sourceTree = "<group>";
-		};
-		BB480A83CF864399952EF5CD /* core-util */ = {
-			isa = PBXGroup;
-			children = (
-				D0CC7BB0C40148329629F3C5 /* CoreMath.h */,
-				A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */,
-				F84357BFA8D24973AE5D2A20 /* GeomEater.h */,
-				4C2BE32B97124DF98D89A114 /* GeomEater.cpp */,
-				C1F86EEE489C4894B25B6996 /* Gradient.hpp */,
-				8C81700BE4A04EBD8646029B /* Item.hpp */,
-				C140E45669AC497DBBD707DA /* MeshHelpers.h */,
-				D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */,
-				46A774CACE13470A8D6158FE /* Node.hpp */,
-				A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */,
-			);
-			name = "core-util";
-			sourceTree = "<group>";
-		};
-		01B97315FEAEA392516A2CEA /* Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				BB480A83CF864399952EF5CD /* core-util */,
-			);
-			name = Blocks;
 			sourceTree = "<group>";
 		};
 		29B97315FDCFA39411CA2CEA /* Headers */ = {
@@ -196,6 +194,52 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BB480A83CF864399952EF5CD /* core-util */ = {
+			isa = PBXGroup;
+			children = (
+				D0CC7BB0C40148329629F3C5 /* CoreMath.h */,
+				A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */,
+				F84357BFA8D24973AE5D2A20 /* GeomEater.h */,
+				4C2BE32B97124DF98D89A114 /* GeomEater.cpp */,
+				C1F86EEE489C4894B25B6996 /* Gradient.hpp */,
+				8C81700BE4A04EBD8646029B /* Item.hpp */,
+				C140E45669AC497DBBD707DA /* MeshHelpers.h */,
+				D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */,
+				46A774CACE13470A8D6158FE /* Node.hpp */,
+				A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */,
+			);
+			name = "core-util";
+			sourceTree = "<group>";
+		};
+		EF7E4EBA1DFDBD1500AE6B47 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				EF7E4EC31DFDBD5600AE6B47 /* f_reactionDiffusion.glsl */,
+				EF7E4EC41DFDBD5600AE6B47 /* f_renderGrid.glsl */,
+				EF7E4EC51DFDBD5600AE6B47 /* v_passThrough.glsl */,
+			);
+			name = assets;
+			path = ../assets;
+			sourceTree = "<group>";
+		};
+		EF7E4EC91DFDBD7C00AE6B47 /* buildmesh */ = {
+			isa = PBXGroup;
+			children = (
+				EF7E4ECC1DFDBD7C00AE6B47 /* buildmesh.h */,
+				EF7E4ECE1DFDBD7C00AE6B47 /* MathBase.h */,
+				EF7E4ECF1DFDBD7C00AE6B47 /* Mesh.cpp */,
+				EF7E4ED01DFDBD7C00AE6B47 /* Mesh.h */,
+				EF7E4ED11DFDBD7C00AE6B47 /* MeshBuilds.cpp */,
+				EF7E4ED21DFDBD7C00AE6B47 /* MeshBuilds.h */,
+				EF7E4ED31DFDBD7C00AE6B47 /* MeshGroup.cpp */,
+				EF7E4ED41DFDBD7C00AE6B47 /* MeshGroup.h */,
+				EF7E4ED61DFDBD7C00AE6B47 /* Vertex.cpp */,
+				EF7E4ED71DFDBD7C00AE6B47 /* Vertex.h */,
+			);
+			name = buildmesh;
+			path = ../../../cpp/buildmesh;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -222,6 +266,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ReactionDiffusionCubeMap" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -247,6 +293,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				61EAC96DD0244D64A69E5198 /* CinderApp.icns in Resources */,
+				EF7E4EC61DFDBD5600AE6B47 /* f_reactionDiffusion.glsl in Resources */,
+				EF7E4EC71DFDBD5600AE6B47 /* f_renderGrid.glsl in Resources */,
+				EF7E4EC81DFDBD5600AE6B47 /* v_passThrough.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,11 +307,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				18308C46C7F6488FBD64266F /* ReactionDiffusionCubeMapApp.cpp in Sources */,
+				EF7E4EDB1DFDBD7C00AE6B47 /* MeshBuilds.cpp in Sources */,
 				CF2D8F5038024DF78467F7CD /* CoreMath.cpp in Sources */,
 				9AC3C769B50943469B87D231 /* GeomEater.cpp in Sources */,
 				A4F647B7772F4425A1B3D6FF /* Gradient.hpp in Sources */,
 				B1B2D3A4DE1941DB82B68EFC /* Item.hpp in Sources */,
+				EF7E4EDA1DFDBD7C00AE6B47 /* Mesh.cpp in Sources */,
+				EF7E4EDC1DFDBD7C00AE6B47 /* MeshGroup.cpp in Sources */,
 				C47EF9CC9A9A422DAB1E088A /* MeshHelpers.cpp in Sources */,
+				EF7E4EDD1DFDBD7C00AE6B47 /* Vertex.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,17 +326,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ReactionDiffusionCubeMap_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReactionDiffusionCubeMap_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -305,12 +358,12 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ReactionDiffusionCubeMap_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NDEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReactionDiffusionCubeMap_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -327,7 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CINDER_PATH = "../../../../Code/cinder";
+				CINDER_PATH = ../../../../Code/cinder;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
 				CLANG_CXX_LIBRARY = "libc++";
 				ENABLE_TESTABILITY = YES;
@@ -345,7 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CINDER_PATH = "../../../../Code/cinder";
+				CINDER_PATH = ../../../../Code/cinder;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
