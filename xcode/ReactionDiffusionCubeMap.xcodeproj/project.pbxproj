@@ -1,0 +1,384 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
+		006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
+		0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0091D8F80E81B9330029341E /* OpenGL.framework */; };
+		00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784AF0FF439BC000DE1D7 /* Accelerate.framework */; };
+		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
+		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
+		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
+		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		3196AABD062B4271B50CB277 /* NoiseWalker.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */; };
+		27917EA6A1D34D50B8CD4C5C /* Node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 46A774CACE13470A8D6158FE /* Node.hpp */; };
+		C47EF9CC9A9A422DAB1E088A /* MeshHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */; };
+		0B0A7D605975420EBBFDB274 /* MeshHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = C140E45669AC497DBBD707DA /* MeshHelpers.h */; };
+		B1B2D3A4DE1941DB82B68EFC /* Item.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C81700BE4A04EBD8646029B /* Item.hpp */; };
+		A4F647B7772F4425A1B3D6FF /* Gradient.hpp in Sources */ = {isa = PBXBuildFile; fileRef = C1F86EEE489C4894B25B6996 /* Gradient.hpp */; };
+		9AC3C769B50943469B87D231 /* GeomEater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BE32B97124DF98D89A114 /* GeomEater.cpp */; };
+		CC451A94363D40C0866E3E76 /* GeomEater.h in Headers */ = {isa = PBXBuildFile; fileRef = F84357BFA8D24973AE5D2A20 /* GeomEater.h */; };
+		CF2D8F5038024DF78467F7CD /* CoreMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */; };
+		9F9E2E6D469F40A09A0A76FC /* CoreMath.h in Headers */ = {isa = PBXBuildFile; fileRef = D0CC7BB0C40148329629F3C5 /* CoreMath.h */; };
+		2A2C661E31054527A9DB61E8 /* ReactionDiffusionCubeMap_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 7B2523B5E0C747B29105BDDE /* ReactionDiffusionCubeMap_Prefix.pch */; };
+		61EAC96DD0244D64A69E5198 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 70B9D1041DC241299490E0AE /* CinderApp.icns */; };
+		8489F8DBE15C40BD97A5AE63 /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = D7DB8DB7964249F6893BD7E5 /* Resources.h */; };
+		18308C46C7F6488FBD64266F /* ReactionDiffusionCubeMapApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D5055ED659649B4AB733418 /* ReactionDiffusionCubeMapApp.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		006D720219952D00008149E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		006D720319952D00008149E2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		8D1107320486CEB800E47090 /* ReactionDiffusionCubeMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactionDiffusionCubeMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D5055ED659649B4AB733418 /* ReactionDiffusionCubeMapApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/ReactionDiffusionCubeMapApp.cpp; sourceTree = "<group>"; name = ReactionDiffusionCubeMapApp.cpp; };
+		D7DB8DB7964249F6893BD7E5 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
+		70B9D1041DC241299490E0AE /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
+		86858DF6CAD143D2AC68A5AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
+		7B2523B5E0C747B29105BDDE /* ReactionDiffusionCubeMap_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ReactionDiffusionCubeMap_Prefix.pch; sourceTree = "<group>"; name = ReactionDiffusionCubeMap_Prefix.pch; };
+		D0CC7BB0C40148329629F3C5 /* CoreMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../Code/cinder/blocks/core-util/CoreMath.h"; sourceTree = "<group>"; name = CoreMath.h; };
+		A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../Code/cinder/blocks/core-util/CoreMath.cpp"; sourceTree = "<group>"; name = CoreMath.cpp; };
+		F84357BFA8D24973AE5D2A20 /* GeomEater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../Code/cinder/blocks/core-util/GeomEater.h"; sourceTree = "<group>"; name = GeomEater.h; };
+		4C2BE32B97124DF98D89A114 /* GeomEater.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../Code/cinder/blocks/core-util/GeomEater.cpp"; sourceTree = "<group>"; name = GeomEater.cpp; };
+		C1F86EEE489C4894B25B6996 /* Gradient.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/Gradient.hpp"; sourceTree = "<group>"; name = Gradient.hpp; };
+		8C81700BE4A04EBD8646029B /* Item.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/Item.hpp"; sourceTree = "<group>"; name = Item.hpp; };
+		C140E45669AC497DBBD707DA /* MeshHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../Code/cinder/blocks/core-util/MeshHelpers.h"; sourceTree = "<group>"; name = MeshHelpers.h; };
+		D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../Code/cinder/blocks/core-util/MeshHelpers.cpp"; sourceTree = "<group>"; name = MeshHelpers.cpp; };
+		46A774CACE13470A8D6158FE /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/Node.hpp"; sourceTree = "<group>"; name = Node.hpp; };
+		A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../Code/cinder/blocks/core-util/NoiseWalker.hpp"; sourceTree = "<group>"; name = NoiseWalker.hpp; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */,
+				006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
+				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
+				00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */,
+				00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */,
+				00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */,
+				00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */,
+				00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */,
+				00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				2D5055ED659649B4AB733418 /* ReactionDiffusionCubeMapApp.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006D720219952D00008149E2 /* AVFoundation.framework */,
+				006D720319952D00008149E2 /* CoreMedia.framework */,
+				00B784AF0FF439BC000DE1D7 /* Accelerate.framework */,
+				00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */,
+				00B784B10FF439BC000DE1D7 /* AudioUnit.framework */,
+				00B784B20FF439BC000DE1D7 /* CoreAudio.framework */,
+				5323E6B10EAFCA74003A9687 /* CoreVideo.framework */,
+				0091D8F80E81B9330029341E /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				00B995581B128DF400A5C623 /* IOKit.framework */,
+				00B995591B128DF400A5C623 /* IOSurface.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* ReactionDiffusionCubeMap.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* ReactionDiffusionCubeMap */ = {
+			isa = PBXGroup;
+			children = (
+				01B97315FEAEA392516A2CEA /* Blocks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = ReactionDiffusionCubeMap;
+			sourceTree = "<group>";
+		};
+		BB480A83CF864399952EF5CD /* core-util */ = {
+			isa = PBXGroup;
+			children = (
+				D0CC7BB0C40148329629F3C5 /* CoreMath.h */,
+				A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */,
+				F84357BFA8D24973AE5D2A20 /* GeomEater.h */,
+				4C2BE32B97124DF98D89A114 /* GeomEater.cpp */,
+				C1F86EEE489C4894B25B6996 /* Gradient.hpp */,
+				8C81700BE4A04EBD8646029B /* Item.hpp */,
+				C140E45669AC497DBBD707DA /* MeshHelpers.h */,
+				D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */,
+				46A774CACE13470A8D6158FE /* Node.hpp */,
+				A1A215E3F0AD4A2886414D96 /* NoiseWalker.hpp */,
+			);
+			name = "core-util";
+			sourceTree = "<group>";
+		};
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				BB480A83CF864399952EF5CD /* core-util */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				D7DB8DB7964249F6893BD7E5 /* Resources.h */,
+				7B2523B5E0C747B29105BDDE /* ReactionDiffusionCubeMap_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				70B9D1041DC241299490E0AE /* CinderApp.icns */,
+				86858DF6CAD143D2AC68A5AF /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* ReactionDiffusionCubeMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "ReactionDiffusionCubeMap" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReactionDiffusionCubeMap;
+			productInstallPath = "$(HOME)/Applications";
+			productName = ReactionDiffusionCubeMap;
+			productReference = 8D1107320486CEB800E47090 /* ReactionDiffusionCubeMap.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ReactionDiffusionCubeMap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* ReactionDiffusionCubeMap */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* ReactionDiffusionCubeMap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61EAC96DD0244D64A69E5198 /* CinderApp.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18308C46C7F6488FBD64266F /* ReactionDiffusionCubeMapApp.cpp in Sources */,
+				CF2D8F5038024DF78467F7CD /* CoreMath.cpp in Sources */,
+				9AC3C769B50943469B87D231 /* GeomEater.cpp in Sources */,
+				A4F647B7772F4425A1B3D6FF /* Gradient.hpp in Sources */,
+				B1B2D3A4DE1941DB82B68EFC /* Item.hpp in Sources */,
+				C47EF9CC9A9A422DAB1E088A /* MeshHelpers.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ReactionDiffusionCubeMap_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = ReactionDiffusionCubeMap;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ReactionDiffusionCubeMap_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = ReactionDiffusionCubeMap;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = "../../../../Code/cinder";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = "../../../../Code/cinder";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "ReactionDiffusionCubeMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ReactionDiffusionCubeMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
