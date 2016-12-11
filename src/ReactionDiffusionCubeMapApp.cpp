@@ -5,6 +5,8 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/Color.h"
+#include "cinder/Camera.h"
+#include "cinder/CameraUi.h"
 
 #include "glm/gtc/constants.hpp"
 
@@ -33,10 +35,13 @@ public:
 	void updateRD();
 	void drawRD();
 
-	int mWidth, mHeight;
+	gl::FboCubeMapRef mSourceFbo;
+	gl::FboCubeMapRef mDestFbo;
 
-	gl::FboRef mSourceFbo;
-	gl::FboRef mDestFbo;
+	gl::TriMeshRef mSphereMesh;
+
+	Camera mCamera;
+	CameraUi mCameraUi;
 
 	gl::FboRef mRenderFbo;
 
@@ -83,39 +88,41 @@ static std::map<int, float *> availableTypes = {
 };
 
 static int mInitialType = 9;
-static int updatesPerFrame = 10;
+static int updatesPerFrame = 5;
+static int cubeMapSide = 500;
 
 void ReactionDiffusionCubeMapApp::prepSettings(Settings * settings) {
 	settings->setFullScreen();
 	settings->setTitle("Reaction Diffusion Interpretation");
-	// settings->setHighDensityDisplayEnabled();
+	settings->setHighDensityDisplayEnabled();
 }
 
 void ReactionDiffusionCubeMapApp::setup()
 {
-	mWidth = getWindowWidth();
-	mHeight = getWindowHeight();
-
 	gl::Texture2d::Format colorTextureFormat = gl::Texture2d::Format().internalFormat(GL_RGB32F).wrap(GL_REPEAT);
 	gl::Fbo::Format gridFboFmt = gl::Fbo::Format().colorTexture(colorTextureFormat);
 
-	mSourceFbo = gl::Fbo::create(mWidth, mHeight, gridFboFmt);
-	mDestFbo = gl::Fbo::create(mWidth, mHeight, gridFboFmt);
+	mSourceFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
+	mDestFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
 
-	mRenderFbo = gl::Fbo::create(mWidth, mHeight);
+	mRenderFbo = gl::Fbo::create(getWindowWidth(), getWindowHeight());
+
+	mCamera.lookAt(vec3(0, 0, 4), vec3(0), vec3(0, 1, 0));
+	mCameraUi = CameraUi(& mCamera, getWindow());
 
 	mRDProgram = gl::GlslProg::create(loadAsset("v_passThrough.glsl"), loadAsset("f_reactionDiffusion.glsl"));
-	mRDProgram->uniform("gridWidth", mWidth);
-	mRDProgram->uniform("gridHeight", mHeight);
+	mRDProgram->uniform("gridSide", cubeMapSide);
 	mRDProgram->uniform("uPrevFrame", mRDReadFboBinding);
 	uploadRates(availableTypes[mInitialType]);
 
 	mRenderRDProgram = setupRenderShader();
 
-	gl::setMatricesWindow(mWidth, mHeight);
+	gl::enableDepth();
+	gl::enableFaceCulling();
+	gl::cullface(GL_BACK);
 
-	// setupCircleRD(20);
-	setupSquareRD(40);
+	setupCircleRD(20);
+	// setupSquareRD(40);
 	// setupRoundedSquareRD(40);
 }
 

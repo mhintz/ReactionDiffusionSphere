@@ -1,11 +1,10 @@
 #version 330
 
-in vec2 fTexCoord0;
+in vec3 fTexCoord0;
 
-uniform int gridWidth;
-uniform int gridHeight;
+uniform int gridSide;
 
-uniform sampler2D uPrevFrame;
+uniform samplerCube uPrevFrame;
 
 out vec4 FragColor;
 

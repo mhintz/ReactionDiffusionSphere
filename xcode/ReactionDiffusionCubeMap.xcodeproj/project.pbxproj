@@ -25,13 +25,14 @@
 		B1B2D3A4DE1941DB82B68EFC /* Item.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C81700BE4A04EBD8646029B /* Item.hpp */; };
 		C47EF9CC9A9A422DAB1E088A /* MeshHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */; };
 		CF2D8F5038024DF78467F7CD /* CoreMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A569DB3401EF4ADAB3DDF256 /* CoreMath.cpp */; };
-		EF7E4EC61DFDBD5600AE6B47 /* f_reactionDiffusion.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EC31DFDBD5600AE6B47 /* f_reactionDiffusion.glsl */; };
-		EF7E4EC71DFDBD5600AE6B47 /* f_renderGrid.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EC41DFDBD5600AE6B47 /* f_renderGrid.glsl */; };
-		EF7E4EC81DFDBD5600AE6B47 /* v_passThrough.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EC51DFDBD5600AE6B47 /* v_passThrough.glsl */; };
 		EF7E4EDA1DFDBD7C00AE6B47 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ECF1DFDBD7C00AE6B47 /* Mesh.cpp */; };
 		EF7E4EDB1DFDBD7C00AE6B47 /* MeshBuilds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED11DFDBD7C00AE6B47 /* MeshBuilds.cpp */; };
 		EF7E4EDC1DFDBD7C00AE6B47 /* MeshGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED31DFDBD7C00AE6B47 /* MeshGroup.cpp */; };
 		EF7E4EDD1DFDBD7C00AE6B47 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED61DFDBD7C00AE6B47 /* Vertex.cpp */; };
+		EF7E4EE21DFDBE9400AE6B47 /* reactionDiffusion_f.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EDE1DFDBE9400AE6B47 /* reactionDiffusion_f.glsl */; };
+		EF7E4EE31DFDBE9400AE6B47 /* reactionDiffusionPassThrough_v.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EDF1DFDBE9400AE6B47 /* reactionDiffusionPassThrough_v.glsl */; };
+		EF7E4EE41DFDBE9400AE6B47 /* renderGrid_f.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EE01DFDBE9400AE6B47 /* renderGrid_f.glsl */; };
+		EF7E4EE51DFDBE9400AE6B47 /* renderGrid_v.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7E4EE11DFDBE9400AE6B47 /* renderGrid_v.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,9 +64,6 @@
 		D0CC7BB0C40148329629F3C5 /* CoreMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CoreMath.h; path = "../../../../Code/cinder/blocks/core-util/CoreMath.h"; sourceTree = "<group>"; };
 		D533EA0BAF3F44B1BF152219 /* MeshHelpers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = MeshHelpers.cpp; path = "../../../../Code/cinder/blocks/core-util/MeshHelpers.cpp"; sourceTree = "<group>"; };
 		D7DB8DB7964249F6893BD7E5 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
-		EF7E4EC31DFDBD5600AE6B47 /* f_reactionDiffusion.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = f_reactionDiffusion.glsl; sourceTree = "<group>"; };
-		EF7E4EC41DFDBD5600AE6B47 /* f_renderGrid.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = f_renderGrid.glsl; sourceTree = "<group>"; };
-		EF7E4EC51DFDBD5600AE6B47 /* v_passThrough.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = v_passThrough.glsl; sourceTree = "<group>"; };
 		EF7E4ECC1DFDBD7C00AE6B47 /* buildmesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildmesh.h; sourceTree = "<group>"; };
 		EF7E4ECE1DFDBD7C00AE6B47 /* MathBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathBase.h; sourceTree = "<group>"; };
 		EF7E4ECF1DFDBD7C00AE6B47 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
@@ -76,6 +74,10 @@
 		EF7E4ED41DFDBD7C00AE6B47 /* MeshGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshGroup.h; sourceTree = "<group>"; };
 		EF7E4ED61DFDBD7C00AE6B47 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
 		EF7E4ED71DFDBD7C00AE6B47 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		EF7E4EDE1DFDBE9400AE6B47 /* reactionDiffusion_f.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reactionDiffusion_f.glsl; sourceTree = "<group>"; };
+		EF7E4EDF1DFDBE9400AE6B47 /* reactionDiffusionPassThrough_v.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reactionDiffusionPassThrough_v.glsl; sourceTree = "<group>"; };
+		EF7E4EE01DFDBE9400AE6B47 /* renderGrid_f.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = renderGrid_f.glsl; sourceTree = "<group>"; };
+		EF7E4EE11DFDBE9400AE6B47 /* renderGrid_v.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = renderGrid_v.glsl; sourceTree = "<group>"; };
 		F84357BFA8D24973AE5D2A20 /* GeomEater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeomEater.h; path = "../../../../Code/cinder/blocks/core-util/GeomEater.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,9 +216,10 @@
 		EF7E4EBA1DFDBD1500AE6B47 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				EF7E4EC31DFDBD5600AE6B47 /* f_reactionDiffusion.glsl */,
-				EF7E4EC41DFDBD5600AE6B47 /* f_renderGrid.glsl */,
-				EF7E4EC51DFDBD5600AE6B47 /* v_passThrough.glsl */,
+				EF7E4EDE1DFDBE9400AE6B47 /* reactionDiffusion_f.glsl */,
+				EF7E4EDF1DFDBE9400AE6B47 /* reactionDiffusionPassThrough_v.glsl */,
+				EF7E4EE01DFDBE9400AE6B47 /* renderGrid_f.glsl */,
+				EF7E4EE11DFDBE9400AE6B47 /* renderGrid_v.glsl */,
 			);
 			name = assets;
 			path = ../assets;
@@ -292,10 +295,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF7E4EE41DFDBE9400AE6B47 /* renderGrid_f.glsl in Resources */,
+				EF7E4EE31DFDBE9400AE6B47 /* reactionDiffusionPassThrough_v.glsl in Resources */,
 				61EAC96DD0244D64A69E5198 /* CinderApp.icns in Resources */,
-				EF7E4EC61DFDBD5600AE6B47 /* f_reactionDiffusion.glsl in Resources */,
-				EF7E4EC71DFDBD5600AE6B47 /* f_renderGrid.glsl in Resources */,
-				EF7E4EC81DFDBD5600AE6B47 /* v_passThrough.glsl in Resources */,
+				EF7E4EE21DFDBE9400AE6B47 /* reactionDiffusion_f.glsl in Resources */,
+				EF7E4EE51DFDBE9400AE6B47 /* renderGrid_v.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
