@@ -41,8 +41,34 @@ vec3 interpColorScheme(float t) {
   return color;
 }
 
+float max3(vec3 x) {
+  return max(x.x, max(x.y, x.z));
+}
+
+vec3 projectToCubeMapFace(vec3 cmapCoord) {
+  return cmapCoord / max3(cmapCoord * sign(cmapCoord));
+}
+
+vec3 faceCenterFromCoord(vec3 coordOnFace) {
+  return floor(abs(coordOnFace)) * sign(coordOnFace);
+}
+
+// vec3 
+
 void main() {
-  vec4 gridValues = texture(uGridSampler, CubeMapTexCoord);
+  vec3 normalizedCMCoord = normalize(CubeMapTexCoord);
+  vec3 projectedCMCoord = projectToCubeMapFace(normalizedCMCoord);
+  vec3 faceCenter = faceCenterFromCoord(projectedCMCoord);
+  if (faceCenter == vec3(0)) { // There are some funny bugs :/
+    discard;
+  }
+  vec3 toCenter = faceCenter - projectedCMCoord;
+  float angleSecant = 1.0 / dot(faceCenter, normalizedCMCoord); // 1.0 / cos(theta)
+  float dTdTheta = pow(angleSecant, 2.0); // >= 1.0
+  // vec3 adjustedCoord = projectedCMCoord + (1.0 - dot(faceCenter, normalizedCMCoord)) * normalize(toCenter);
+  vec3 adjustedCoord = projectedCMCoord + (1.0 / dTdTheta) * normalize(toCenter);
+
+  vec4 gridValues = texture(uGridSampler, adjustedCoord);
   float A = gridValues.g;
   float B = gridValues.b;
 
@@ -73,6 +99,8 @@ void main() {
   // vec3 baseColor = mix(vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 0.0), A);
 
   // baseColor = gridValues.rgb;
+
+  // baseColor = abs(faceCenter);
 
   FragColor = vec4(baseColor, 1.0);
 }
