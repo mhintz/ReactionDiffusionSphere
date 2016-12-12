@@ -139,10 +139,6 @@ void ReactionDiffusionCubeMapApp::setup()
 
 	mRenderRDProgram = setupRenderShader();
 
-	gl::enableDepth();
-	gl::enableFaceCulling();
-	gl::cullFace(GL_BACK);
-
 	setupCircleRD(20);
 	// setupSquareRD(40);
 	// setupRoundedSquareRD(40);
@@ -164,37 +160,46 @@ void ReactionDiffusionCubeMapApp::update()
 	if (!mPauseSimulation) {
 		// Update the reaction-diffusion system multiple times per frame to speed things up
 		for (int i = 0; i < updatesPerFrame; i++) {
+			gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+			gl::ScopedDepth scpDepth(false);
+
 			gl::ScopedMatrices scpMat;
 			gl::setMatricesWindow(cubeMapSide, cubeMapSide);
+
 			gl::ScopedGlslProg scpShader(mRDProgram);
 
 			// Bind the source FBO to read the previous state
 			gl::ScopedTextureBind scpTex(mSourceFbo->getTextureCubeMap(), mRDReadFboBinding);
 
 			// Update the destination FBO
-
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X);
 			mRDProgram->uniform("cubeFace", 0);
+			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
 			mRDProgram->uniform("cubeFace", 1);
+			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
 			mRDProgram->uniform("cubeFace", 2);
+			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
 			mRDProgram->uniform("cubeFace", 3);
+			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
 			mRDProgram->uniform("cubeFace", 4);
+			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 			mRDProgram->uniform("cubeFace", 5);
+			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
 
 			mDestFbo->unbindFramebuffer();
@@ -207,11 +212,14 @@ void ReactionDiffusionCubeMapApp::update()
 
 void ReactionDiffusionCubeMapApp::draw()
 {
-	gl::clear(Color(0, 0, 0));
-
 	{
+		gl::ScopedDepth scpDepth(true);
+		gl::ScopedFaceCulling scpFace(true, GL_BACK);
+
 		gl::ScopedMatrices scpMat;
 		gl::setMatrices(mCamera);
+
+		gl::clear(Color(0, 0, 0));
 		
 		// Draws the reaction-diffusion Cubemap on the sphere
 		gl::ScopedTextureBind scpTex(mDestFbo->getTextureCubeMap(), mRDRenderTextureBinding);
@@ -242,6 +250,9 @@ void ReactionDiffusionCubeMapApp::drawVectorToFBO(std::vector<Color> const & pix
 	auto initTexFmt = gl::Texture2d::Format().dataType(GL_FLOAT).internalFormat(GL_RGB32F);
 	auto initTexture = gl::Texture2d::create(pixelBuffer.data(), GL_RGB, cubeMapSide, cubeMapSide, initTexFmt);
 
+	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+	gl::ScopedDepth scpDepth(false);
+
 	gl::ScopedMatrices scpMat;
 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
 
@@ -255,6 +266,9 @@ void ReactionDiffusionCubeMapApp::drawVectorToFBO(std::vector<Color> const & pix
 void ReactionDiffusionCubeMapApp::setupRoundedSquareRD(float side) {
 	vec2 center(cubeMapSide / 2.0f, cubeMapSide / 2.0f);
 	float halfSide = side / 2.0f;
+
+	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+	gl::ScopedDepth scpDepth(false);
 
 	gl::ScopedMatrices scpMat;
 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
@@ -276,6 +290,9 @@ void ReactionDiffusionCubeMapApp::setupRoundedSquareRD(float side) {
 }
 
 void ReactionDiffusionCubeMapApp::setupCircleRD(float rad) {
+	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+	gl::ScopedDepth scpDepth(false);
+
 	gl::ScopedMatrices scpMat;
 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
 
@@ -293,6 +310,9 @@ void ReactionDiffusionCubeMapApp::setupCircleRD(float rad) {
 void ReactionDiffusionCubeMapApp::setupSquareRD(float side) {
 	vec2 center(cubeMapSide / 2.0f, cubeMapSide / 2.0f);
 	float halfSide = side / 2.0f;
+
+	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+	gl::ScopedDepth scpDepth(false);
 
 	gl::ScopedMatrices scpMat;
 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
