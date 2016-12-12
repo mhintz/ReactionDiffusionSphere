@@ -85,7 +85,8 @@ static std::map<int, float *> availableTypes = {
 
 static int mInitialType = 9;
 static int updatesPerFrame = 10;
-static int cubeMapSide = 500;
+// static int cubeMapSide = 512;
+static int cubeMapSide = 256;
 
 void ReactionDiffusionCubeMapApp::prepSettings(Settings * settings) {
 	settings->setFullScreen();
