@@ -55,38 +55,55 @@ vec4[6] colors = vec4[](
   vec4(0, 1, 1, 1)
 );
 
-void main() {
-  // FragColor = texture(uPrevFrame, CubeMapTexCoord);
-  // FragColor = vec4(1, 1, 1, 1);
-  FragColor = colors[cubeFace];
+vec3[6] vertIncs = vec3[](
+  vec3(0, 1, 0),
+  vec3(0, 1, 0),
+  vec3(0, 0, 1),
+  vec3(0, 0, 1),
+  vec3(0, 1, 0),
+  vec3(0, 1, 0)
+);
+
+vec3[6] horIncs = vec3[](
+  vec3(0, 0, 1),
+  vec3(0, 0, 1),
+  vec3(1, 0, 0),
+  vec3(1, 0, 0),
+  vec3(1, 0, 0),
+  vec3(1, 0, 0)
+);
+
+float max3(vec3 val) {
+  return max(max(val.x, val.y), val.z);
 }
 
-// void main() {
-//   float xinc = 1.0 / gridWidth;
-//   float yinc = 1.0 / gridHeight;
+void main() {
+  highp vec3 xinc = horIncs[cubeFace] / gridSideLength;
+  highp vec3 yinc = vertIncs[cubeFace] / gridSideLength;
 
-//   vec4 ul = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, -yinc));
-//   vec4 u = texture(uPrevFrame, fTexCoord0 + vec2(0, -yinc));
-//   vec4 ur = texture(uPrevFrame, fTexCoord0 + vec2(xinc, -yinc));
-//   vec4 l = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, 0));
-//   vec4 cur = texture(uPrevFrame, fTexCoord0 + vec2(0, 0));
-//   vec4 r = texture(uPrevFrame, fTexCoord0 + vec2(xinc, 0));
-//   vec4 bl = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, yinc));
-//   vec4 b = texture(uPrevFrame, fTexCoord0 + vec2(0, yinc));
-//   vec4 br = texture(uPrevFrame, fTexCoord0 + vec2(xinc, yinc));
+  vec4 ul = texture(uPrevFrame, normalize(CubeMapTexCoord - xinc + yinc));
+  vec4 u = texture(uPrevFrame, normalize(CubeMapTexCoord + yinc));
+  vec4 ur = texture(uPrevFrame, normalize(CubeMapTexCoord + xinc + yinc));
+  vec4 l = texture(uPrevFrame, normalize(CubeMapTexCoord - xinc));
+  vec4 cur = texture(uPrevFrame, normalize(CubeMapTexCoord));
+  vec4 r = texture(uPrevFrame, normalize(CubeMapTexCoord + xinc));
+  vec4 bl = texture(uPrevFrame, normalize(CubeMapTexCoord - xinc - yinc));
+  vec4 b = texture(uPrevFrame, normalize(CubeMapTexCoord - yinc));
+  vec4 br = texture(uPrevFrame, normalize(CubeMapTexCoord + xinc - yinc));
 
-//   float curA = cur.g;
-//   float curB = cur.b;
+  float curA = cur.g;
+  float curB = cur.b;
 
-//   float ABB = curA * curB * curB;
+  float ABB = curA * curB * curB;
 
-//   float diffA = diffusionRateA * convoluteA(ul.g, u.g, ur.g, l.g, curA, r.g, bl.g, b.g, br.g);
-//   float diffB = diffusionRateB * convoluteB(ul.b, u.b, ur.b, l.b, curB, r.b, bl.b, b.b, br.b);
+  float diffA = diffusionRateA * convoluteA(ul.g, u.g, ur.g, l.g, curA, r.g, bl.g, b.g, br.g);
+  float diffB = diffusionRateB * convoluteB(ul.b, u.b, ur.b, l.b, curB, r.b, bl.b, b.b, br.b);
 
-//   float newA = curA + (diffA - ABB + feedRateA * (1.0 - curA));
-//   float newB = curB + (diffB + ABB - (feedRateA + killRateB) * curB);
+  float newA = curA + (diffA - ABB + feedRateA * (1.0 - curA));
+  float newB = curB + (diffB + ABB - (feedRateA + killRateB) * curB);
 
-//   // FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-//   // FragColor = texture(uPrevFrame, fTexCoord0);
-//   FragColor = vec4(0.0, newA, newB, 1.0);
-// }
+  // FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  // FragColor = texture(uPrevFrame, CubeMapTexCoord);
+  // FragColor = vec4((CubeMapTexCoord / max3(abs(CubeMapTexCoord))), 1);
+  FragColor = vec4(0.0, newA, newB, 1.0);
+}

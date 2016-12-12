@@ -84,7 +84,7 @@ static std::map<int, float *> availableTypes = {
 };
 
 static int mInitialType = 9;
-static int updatesPerFrame = 1;
+static int updatesPerFrame = 10;
 static int cubeMapSide = 500;
 
 void ReactionDiffusionCubeMapApp::prepSettings(Settings * settings) {
@@ -96,23 +96,17 @@ void ReactionDiffusionCubeMapApp::prepSettings(Settings * settings) {
 // Clears an FboCubeMap to all "A"
 void clearFboCubeMapToA(gl::FboCubeMapRef targetFBO) {
 	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-	// gl::clear(Color(0, 1, 0));
-	gl::clear(Color(0, 0, 0));
+	gl::clear(Color(0, 1, 0));
 	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
-	// gl::clear(Color(0, 1, 0));
-	gl::clear(Color(0, 0, 0));
+	gl::clear(Color(0, 1, 0));
 	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
-	// gl::clear(Color(0, 1, 0));
-	gl::clear(Color(0, 0, 0));
+	gl::clear(Color(0, 1, 0));
 	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
-	// gl::clear(Color(0, 1, 0));
-	gl::clear(Color(0, 0, 0));
+	gl::clear(Color(0, 1, 0));
 	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
-	// gl::clear(Color(0, 1, 0));
-	gl::clear(Color(0, 0, 0));
+	gl::clear(Color(0, 1, 0));
 	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
-	// gl::clear(Color(0, 1, 0));
-	gl::clear(Color(0, 0, 0));
+	gl::clear(Color(0, 1, 0));
 	targetFBO->unbindFramebuffer();
 }
 
@@ -122,9 +116,9 @@ void ReactionDiffusionCubeMapApp::setup()
 	auto gridFboFmt = gl::FboCubeMap::Format().textureCubeMapFormat(colorTextureFormat);
 
 	mSourceFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
-	// clearFboCubeMapToA(mSourceFbo);
+	clearFboCubeMapToA(mSourceFbo);
 	mDestFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
-	// clearFboCubeMapToA(mDestFbo);
+	clearFboCubeMapToA(mDestFbo);
 
 	mSphereMesh = TriMesh::create(geom::Sphere().subdivisions(30).center(vec3(0)).radius(1.0f));
 
