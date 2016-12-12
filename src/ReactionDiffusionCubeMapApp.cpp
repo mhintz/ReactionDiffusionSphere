@@ -230,7 +230,7 @@ void ReactionDiffusionCubeMapApp::draw()
 	}
 
 	// Draw the framerate
-	gl::drawString(std::to_string(getAverageFps()), vec2(10.0f, 20.0f), ColorA(0.0f, 0.0f, 0.0f, 1.0f));
+	gl::drawString(std::to_string(getAverageFps()), vec2(10.0f, 20.0f), ColorA(1.0f, 1.0f, 1.0f, 1.0f));
 }
 
 void ReactionDiffusionCubeMapApp::keyUp(KeyEvent evt) {
