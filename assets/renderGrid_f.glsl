@@ -1,8 +1,8 @@
 #version 330
 
-in vec2 fTexCoord0;
+in vec3 CubeMapTexCoord;
 
-uniform sampler2D uGridSampler;
+uniform samplerCube uGridSampler;
 
 out vec4 FragColor;
 
@@ -42,7 +42,7 @@ vec3 interpColorScheme(float t) {
 }
 
 void main() {
-  vec4 gridValues = texture(uGridSampler, fTexCoord0);
+  vec4 gridValues = texture(uGridSampler, CubeMapTexCoord);
   float A = gridValues.g;
   float B = gridValues.b;
 
@@ -73,4 +73,6 @@ void main() {
   // vec3 baseColor = mix(vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 0.0), A);
 
   FragColor = vec4(baseColor, 1.0);
+
+  FragColor = texture(uGridSampler, CubeMapTexCoord);
 }

@@ -1,9 +1,9 @@
 #version 330
 
-in vec3 fTexCoord0;
+in vec3 CubeMapTexCoord;
 
-uniform int gridSide;
-
+uniform int cubeFace;
+uniform int gridSideLength;
 uniform samplerCube uPrevFrame;
 
 out vec4 FragColor;
@@ -46,32 +46,47 @@ uniform float killRateB;
 // const float diffusionRateA = 0.4;
 // const float diffusionRateB = 0.05;
 
+vec4[6] colors = vec4[](
+  vec4(1, 0, 0, 1),
+  vec4(0, 1, 0, 1),
+  vec4(0, 0, 1, 1),
+  vec4(1, 1, 0, 1),
+  vec4(1, 0, 1, 1),
+  vec4(0, 1, 1, 1)
+);
+
 void main() {
-  float xinc = 1.0 / gridWidth;
-  float yinc = 1.0 / gridHeight;
-
-  vec4 ul = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, -yinc));
-  vec4 u = texture(uPrevFrame, fTexCoord0 + vec2(0, -yinc));
-  vec4 ur = texture(uPrevFrame, fTexCoord0 + vec2(xinc, -yinc));
-  vec4 l = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, 0));
-  vec4 cur = texture(uPrevFrame, fTexCoord0 + vec2(0, 0));
-  vec4 r = texture(uPrevFrame, fTexCoord0 + vec2(xinc, 0));
-  vec4 bl = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, yinc));
-  vec4 b = texture(uPrevFrame, fTexCoord0 + vec2(0, yinc));
-  vec4 br = texture(uPrevFrame, fTexCoord0 + vec2(xinc, yinc));
-
-  float curA = cur.g;
-  float curB = cur.b;
-
-  float ABB = curA * curB * curB;
-
-  float diffA = diffusionRateA * convoluteA(ul.g, u.g, ur.g, l.g, curA, r.g, bl.g, b.g, br.g);
-  float diffB = diffusionRateB * convoluteB(ul.b, u.b, ur.b, l.b, curB, r.b, bl.b, b.b, br.b);
-
-  float newA = curA + (diffA - ABB + feedRateA * (1.0 - curA));
-  float newB = curB + (diffB + ABB - (feedRateA + killRateB) * curB);
-
-  // FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  // FragColor = texture(uPrevFrame, fTexCoord0);
-  FragColor = vec4(0.0, newA, newB, 1.0);
+  // FragColor = texture(uPrevFrame, CubeMapTexCoord);
+  // FragColor = vec4(1, 1, 1, 1);
+  FragColor = colors[cubeFace];
 }
+
+// void main() {
+//   float xinc = 1.0 / gridWidth;
+//   float yinc = 1.0 / gridHeight;
+
+//   vec4 ul = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, -yinc));
+//   vec4 u = texture(uPrevFrame, fTexCoord0 + vec2(0, -yinc));
+//   vec4 ur = texture(uPrevFrame, fTexCoord0 + vec2(xinc, -yinc));
+//   vec4 l = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, 0));
+//   vec4 cur = texture(uPrevFrame, fTexCoord0 + vec2(0, 0));
+//   vec4 r = texture(uPrevFrame, fTexCoord0 + vec2(xinc, 0));
+//   vec4 bl = texture(uPrevFrame, fTexCoord0 + vec2(-xinc, yinc));
+//   vec4 b = texture(uPrevFrame, fTexCoord0 + vec2(0, yinc));
+//   vec4 br = texture(uPrevFrame, fTexCoord0 + vec2(xinc, yinc));
+
+//   float curA = cur.g;
+//   float curB = cur.b;
+
+//   float ABB = curA * curB * curB;
+
+//   float diffA = diffusionRateA * convoluteA(ul.g, u.g, ur.g, l.g, curA, r.g, bl.g, b.g, br.g);
+//   float diffB = diffusionRateB * convoluteB(ul.b, u.b, ur.b, l.b, curB, r.b, bl.b, b.b, br.b);
+
+//   float newA = curA + (diffA - ABB + feedRateA * (1.0 - curA));
+//   float newB = curB + (diffB + ABB - (feedRateA + killRateB) * curB);
+
+//   // FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+//   // FragColor = texture(uPrevFrame, fTexCoord0);
+//   FragColor = vec4(0.0, newA, newB, 1.0);
+// }
