@@ -170,31 +170,37 @@ void ReactionDiffusionCubeMapApp::update()
 			mRDProgram->uniform("cubeFace", 0);
 			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
+			// gl::clear(Color(1, 0, 0));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
 			mRDProgram->uniform("cubeFace", 1);
 			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
+			// gl::clear(Color(0, 1, 1));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
 			mRDProgram->uniform("cubeFace", 2);
 			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
+			// gl::clear(Color(0, 1, 0));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
 			mRDProgram->uniform("cubeFace", 3);
 			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
+			// gl::clear(Color(1, 0, 1));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
 			mRDProgram->uniform("cubeFace", 4);
 			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
+			// gl::clear(Color(0, 0, 1));
 
 			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 			mRDProgram->uniform("cubeFace", 5);
 			gl::clear(Color(0, 0, 0));
 			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
+			// gl::clear(Color(1, 1, 0));
 
 			mDestFbo->unbindFramebuffer();
 

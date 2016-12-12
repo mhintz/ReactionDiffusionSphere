@@ -72,5 +72,7 @@ void main() {
 
   // vec3 baseColor = mix(vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 0.0), A);
 
+  // baseColor = gridValues.rgb;
+
   FragColor = vec4(baseColor, 1.0);
 }
