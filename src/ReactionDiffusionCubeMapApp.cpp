@@ -237,7 +237,11 @@ void ReactionDiffusionCubeMapApp::draw()
 void ReactionDiffusionCubeMapApp::keyUp(KeyEvent evt) {
 	char keyChar = evt.getChar();
 	if (keyChar == 'r') {
-		mRenderRDProgram = setupRenderShader();
+		try {
+			mRenderRDProgram = setupRenderShader();
+		} catch (gl::GlslProgCompileExc exp) {
+			console() << exp.what() << std::endl;
+		}
 	} else if (keyChar == 'p') {
 		mPauseSimulation = !mPauseSimulation;
 	} else if ('0' < keyChar && keyChar <= '0' + availableTypes.size()) {
