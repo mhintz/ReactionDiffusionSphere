@@ -53,20 +53,37 @@ vec3 faceCenterFromCoord(vec3 coordOnFace) {
   return floor(abs(coordOnFace)) * sign(coordOnFace);
 }
 
+vec3 resizeVector(vec3 vector, float length) {
+  return normalize(vector) * length;
+}
+
+float map01(float lo, float hi, float x) {
+  return clamp((x - lo) / (hi - lo), 0, 1);
+}
+
 // vec3 
 
 void main() {
+  const float root2 = pow(2, 0.5);
   vec3 normalizedCMCoord = normalize(CubeMapTexCoord);
   vec3 projectedCMCoord = projectToCubeMapFace(normalizedCMCoord);
   vec3 faceCenter = faceCenterFromCoord(projectedCMCoord);
+
   if (faceCenter == vec3(0)) { // There are some funny bugs :/
     discard;
   }
+
   vec3 toCenter = faceCenter - projectedCMCoord;
-  float angleSecant = 1.0 / dot(faceCenter, normalizedCMCoord); // 1.0 / cos(theta)
-  float dTdTheta = pow(angleSecant, 2.0); // >= 1.0
+  float angleCos = dot(faceCenter, normalizedCMCoord);
+  float angleSecant = 1.0 / angleCos;
+  float dTdTheta = angleSecant * angleSecant; // >= 1.0
   // vec3 adjustedCoord = projectedCMCoord + (1.0 - dot(faceCenter, normalizedCMCoord)) * normalize(toCenter);
-  vec3 adjustedCoord = projectedCMCoord + (1.0 / dTdTheta) * normalize(toCenter);
+  // vec3 adjustedCoord = projectedCMCoord + (toCenter / dTdTheta);
+  // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, 1 - pow(length(toCenter) / root2, 0.5));
+  // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, map01(root2, 0, length(toCenter)));
+  // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, pow(map01(root2, 0, length(toCenter)), 0.5));
+  // vec3 adjustedCoord = projectedCMCoord + pow(dot(toCenter, toCenter), 0.5);
+  vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, map01(0.25, 0, length(toCenter)));
 
   vec4 gridValues = texture(uGridSampler, adjustedCoord);
   float A = gridValues.g;
@@ -101,6 +118,13 @@ void main() {
   // baseColor = gridValues.rgb;
 
   // baseColor = abs(faceCenter);
+
+  // baseColor = abs(toCenter);
+
+  // baseColor = vec3(angleCos, angleCos, angleCos);
+
+  // float val = pow(map01(root2, 0, length(toCenter)), 0.5);
+  // baseColor = vec3(val, val, val);
 
   FragColor = vec4(baseColor, 1.0);
 }
