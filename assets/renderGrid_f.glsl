@@ -77,13 +77,21 @@ void main() {
   float angleCos = dot(faceCenter, normalizedCMCoord);
   float angleSecant = 1.0 / angleCos;
   float dTdTheta = angleSecant * angleSecant; // >= 1.0
+  float angle = acos(angleCos);
   // vec3 adjustedCoord = projectedCMCoord + (1.0 - dot(faceCenter, normalizedCMCoord)) * normalize(toCenter);
   // vec3 adjustedCoord = projectedCMCoord + (toCenter / dTdTheta);
   // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, 1 - pow(length(toCenter) / root2, 0.5));
   // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, map01(root2, 0, length(toCenter)));
   // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, pow(map01(root2, 0, length(toCenter)), 0.5));
   // vec3 adjustedCoord = projectedCMCoord + pow(dot(toCenter, toCenter), 0.5);
-  vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, map01(0.25, 0, length(toCenter)));
+  // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, map01(0, root2, length(toCenter)));
+  // vec3 adjustedCoord = projectedCMCoord - resizeVector(toCenter, (1 + cos(4 * angle)) / 16);
+
+  vec3 fromCenter = projectedCMCoord - faceCenter;
+  vec3 centerAngles = atan(abs(fromCenter));
+  vec3 adjustedCoord = projectedCMCoord + ((1 + cos(4 * centerAngles)) / 32) * (1 - abs(faceCenter)) * normalize(fromCenter);
+
+  // vec3 adjustedCoord = projectedCMCoord;
 
   vec4 gridValues = texture(uGridSampler, adjustedCoord);
   float A = gridValues.g;
