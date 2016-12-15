@@ -113,7 +113,11 @@ void clearFboCubeMapToA(gl::FboCubeMapRef targetFBO) {
 
 void ReactionDiffusionCubeMapApp::setup()
 {
-	auto colorTextureFormat = gl::TextureCubeMap::Format().internalFormat(GL_RGB32F).wrap(GL_CLAMP_TO_EDGE);
+	auto colorTextureFormat = gl::TextureCubeMap::Format()
+		.internalFormat(GL_RGB32F)
+		.wrap(GL_CLAMP_TO_EDGE)
+		.minFilter(GL_NEAREST)
+		.magFilter(GL_NEAREST);
 	auto gridFboFmt = gl::FboCubeMap::Format().textureCubeMapFormat(colorTextureFormat);
 
 	mSourceFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
