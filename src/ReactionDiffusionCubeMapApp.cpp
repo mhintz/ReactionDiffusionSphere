@@ -118,7 +118,10 @@ void ReactionDiffusionCubeMapApp::setup()
 		.wrap(GL_CLAMP_TO_EDGE)
 		.minFilter(GL_NEAREST)
 		.magFilter(GL_NEAREST);
-	auto gridFboFmt = gl::FboCubeMap::Format().textureCubeMapFormat(colorTextureFormat);
+
+	auto gridFboFmt = gl::FboCubeMap::Format()
+		.textureCubeMapFormat(colorTextureFormat)
+		.disableDepth();
 
 	mSourceFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
 	clearFboCubeMapToA(mSourceFbo);
@@ -157,16 +160,16 @@ void ReactionDiffusionCubeMapApp::uploadRates(float * ratePair) {
 void ReactionDiffusionCubeMapApp::update()
 {
 	if (!mPauseSimulation) {
+		gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+		gl::ScopedDepth scpDepth(false);
+
+		gl::ScopedMatrices scpMat;
+		gl::setMatricesWindow(cubeMapSide, cubeMapSide);
+
+		gl::ScopedGlslProg scpShader(mRDProgram);
+
 		// Update the reaction-diffusion system multiple times per frame to speed things up
 		for (int i = 0; i < updatesPerFrame; i++) {
-			gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
-			gl::ScopedDepth scpDepth(false);
-
-			gl::ScopedMatrices scpMat;
-			gl::setMatricesWindow(cubeMapSide, cubeMapSide);
-
-			gl::ScopedGlslProg scpShader(mRDProgram);
-
 			// Bind the source FBO to read the previous state
 			gl::ScopedTextureBind scpTex(mSourceFbo->getTextureCubeMap(), mRDReadFboBinding);
 
