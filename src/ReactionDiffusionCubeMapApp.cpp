@@ -10,6 +10,8 @@
 
 #include "glm/gtc/constants.hpp"
 
+#include "MeshHelpers.h"
+
 using namespace ci;
 using namespace ci::app;
 
@@ -37,13 +39,14 @@ public:
 	gl::FboCubeMapRef mSourceFbo;
 	gl::FboCubeMapRef mDestFbo;
 
-	TriMeshRef mSphereMesh;
-
 	CameraPersp mCamera;
 	CameraUi mCameraUi;
 
 	gl::GlslProgRef mRDProgram;
+
 	gl::GlslProgRef mRenderRDProgram;
+	gl::VboMeshRef mNormalizedCubeMesh;
+	gl::BatchRef mNormalizedCubeBatch;
 
 	bool mPauseSimulation = false;
 
@@ -128,8 +131,6 @@ void ReactionDiffusionCubeMapApp::setup()
 	mDestFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
 	clearFboCubeMapToA(mDestFbo);
 
-	mSphereMesh = TriMesh::create(geom::Sphere().subdivisions(30).center(vec3(0)).radius(1.0f));
-
 	mCamera.lookAt(vec3(0, 0, 4), vec3(0), vec3(0, 1, 0));
 	mCameraUi = CameraUi(& mCamera, getWindow());
 
@@ -140,6 +141,8 @@ void ReactionDiffusionCubeMapApp::setup()
 	uploadRates(availableTypes[mInitialType]);
 
 	mRenderRDProgram = setupRenderShader();
+	mNormalizedCubeMesh = makeNormalizedCubeSphere();
+	mNormalizedCubeBatch = gl::Batch::create(mNormalizedCubeMesh, mRenderRDProgram, { { geom::CUSTOM_0, "aFaceSide" } });
 
 	setupCircleRD(20);
 	// setupSquareRD(40);
@@ -229,16 +232,17 @@ void ReactionDiffusionCubeMapApp::draw()
 
 		gl::clear(Color(0, 0, 0));
 		
-		// Draws the reaction-diffusion Cubemap on the sphere
+		// // Draws the reaction-diffusion Cubemap on the sphere
 		gl::ScopedTextureBind scpTex(mDestFbo->getTextureCubeMap(), mRDRenderTextureBinding);
-		// The reaction-diffusion render shader
-		gl::ScopedGlslProg scpShader(mRenderRDProgram);
-		// Draw the sphere mesh
-		gl::draw(* mSphereMesh);
+
+		mNormalizedCubeBatch->draw();
 	}
 
-	// Draw the framerate
-	gl::drawString(std::to_string(getAverageFps()), vec2(10.0f, 20.0f), ColorA(1.0f, 1.0f, 1.0f, 1.0f));
+	// Debug Zone
+	{
+		// Draw the framerate
+		gl::drawString(std::to_string(getAverageFps()), vec2(10.0f, 20.0f), ColorA(1.0f, 1.0f, 1.0f, 1.0f));
+	}
 }
 
 void ReactionDiffusionCubeMapApp::keyUp(KeyEvent evt) {

@@ -1,6 +1,7 @@
 #version 330
 
 in vec3 CubeMapTexCoord;
+in vec3 FaceCenter;
 
 uniform samplerCube uGridSampler;
 
@@ -49,10 +50,6 @@ vec3 projectToCubeMapFace(vec3 cmapCoord) {
   return cmapCoord / max3(cmapCoord * sign(cmapCoord));
 }
 
-vec3 faceCenterFromCoord(vec3 coordOnFace) {
-  return floor(abs(coordOnFace)) * sign(coordOnFace);
-}
-
 vec3 resizeVector(vec3 vector, float length) {
   return normalize(vector) * length;
 }
@@ -67,18 +64,13 @@ void main() {
   const float root2 = pow(2, 0.5);
   vec3 normalizedCMCoord = normalize(CubeMapTexCoord);
   vec3 projectedCMCoord = projectToCubeMapFace(normalizedCMCoord);
-  vec3 faceCenter = faceCenterFromCoord(projectedCMCoord);
 
-  if (faceCenter == vec3(0)) { // There are some funny bugs :/
-    discard;
-  }
-
-  vec3 toCenter = faceCenter - projectedCMCoord;
-  float angleCos = dot(faceCenter, normalizedCMCoord);
+  vec3 toCenter = FaceCenter - projectedCMCoord;
+  float angleCos = dot(FaceCenter, normalizedCMCoord);
   float angleSecant = 1.0 / angleCos;
   float dTdTheta = angleSecant * angleSecant; // >= 1.0
   float angle = acos(angleCos);
-  // vec3 adjustedCoord = projectedCMCoord + (1.0 - dot(faceCenter, normalizedCMCoord)) * normalize(toCenter);
+  // vec3 adjustedCoord = projectedCMCoord + (1.0 - dot(FaceCenter, normalizedCMCoord)) * normalize(toCenter);
   // vec3 adjustedCoord = projectedCMCoord + (toCenter / dTdTheta);
   // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, 1 - pow(length(toCenter) / root2, 0.5));
   // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, map01(root2, 0, length(toCenter)));
@@ -87,9 +79,9 @@ void main() {
   // vec3 adjustedCoord = projectedCMCoord + resizeVector(toCenter, map01(0, root2, length(toCenter)));
   // vec3 adjustedCoord = projectedCMCoord - resizeVector(toCenter, (1 + cos(4 * angle)) / 16);
 
-  vec3 fromCenter = projectedCMCoord - faceCenter;
+  vec3 fromCenter = projectedCMCoord - FaceCenter;
   vec3 centerAngles = atan(abs(fromCenter));
-  vec3 adjustedCoord = projectedCMCoord + ((1 + cos(4 * centerAngles)) / 32) * (1 - abs(faceCenter)) * normalize(fromCenter);
+  vec3 adjustedCoord = projectedCMCoord + ((1 + cos(4 * centerAngles)) / 32) * (1 - abs(FaceCenter)) * normalize(fromCenter);
 
   // vec3 adjustedCoord = projectedCMCoord;
 
@@ -125,7 +117,7 @@ void main() {
 
   // baseColor = gridValues.rgb;
 
-  // baseColor = abs(faceCenter);
+  // baseColor = abs(FaceCenter);
 
   // baseColor = abs(toCenter);
 
