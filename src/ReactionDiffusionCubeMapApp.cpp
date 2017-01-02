@@ -36,13 +36,15 @@ public:
 	void updateRD();
 	void drawRD();
 
-	gl::FboCubeMapRef mSourceFbo;
-	gl::FboCubeMapRef mDestFbo;
+	gl::TextureCubeMapRef mSourceTex;
+	GLuint mSourceFbo;
+	gl::TextureCubeMapRef mDestTex;
+	GLuint mDestFbo;
+	gl::GlslProgRef mRDProgram;
+	gl::VboMeshRef mPointMesh;
 
 	CameraPersp mCamera;
 	CameraUi mCameraUi;
-
-	gl::GlslProgRef mRDProgram;
 
 	gl::GlslProgRef mRenderRDProgram;
 	gl::VboMeshRef mNormalizedCubeMesh;
@@ -88,30 +90,13 @@ static std::map<int, float *> availableTypes = {
 
 static int mInitialType = 9;
 static int updatesPerFrame = 10;
-// static int cubeMapSide = 512;
-static int cubeMapSide = 256;
+static int cubeMapSide = 512;
+// static int cubeMapSide = 256;
 
 void ReactionDiffusionCubeMapApp::prepSettings(Settings * settings) {
 	settings->setFullScreen();
 	settings->setTitle("Reaction Diffusion Interpretation");
 	settings->setHighDensityDisplayEnabled();
-}
-
-// Clears an FboCubeMap to all "A"
-void clearFboCubeMapToA(gl::FboCubeMapRef targetFBO) {
-	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-	gl::clear(Color(0, 1, 0));
-	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
-	gl::clear(Color(0, 1, 0));
-	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
-	gl::clear(Color(0, 1, 0));
-	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
-	gl::clear(Color(0, 1, 0));
-	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
-	gl::clear(Color(0, 1, 0));
-	targetFBO->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
-	gl::clear(Color(0, 1, 0));
-	targetFBO->unbindFramebuffer();
 }
 
 void ReactionDiffusionCubeMapApp::setup()
@@ -120,25 +105,43 @@ void ReactionDiffusionCubeMapApp::setup()
 		.internalFormat(GL_RGB32F)
 		.wrap(GL_CLAMP_TO_EDGE)
 		.minFilter(GL_NEAREST)
-		.magFilter(GL_NEAREST);
+		.magFilter(GL_NEAREST)
+		.mipmap(false);
 
-	auto gridFboFmt = gl::FboCubeMap::Format()
-		.textureCubeMapFormat(colorTextureFormat)
-		.disableDepth();
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
 
-	mSourceFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
-	clearFboCubeMapToA(mSourceFbo);
-	mDestFbo = gl::FboCubeMap::create(cubeMapSide, cubeMapSide, gridFboFmt);
-	clearFboCubeMapToA(mDestFbo);
+	{
+		mSourceTex = gl::TextureCubeMap::create(cubeMapSide, cubeMapSide, colorTextureFormat);
+		glGenFramebuffers(1, & mSourceFbo);
+		gl::ScopedFramebuffer scpFbo(GL_FRAMEBUFFER, mSourceFbo);
+		glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, mSourceTex->getId(), 0);
+		glDrawBuffers(1, drawBuffers);
+		gl::clear(Color(0, 1, 0)); // Clear to all "A"
+	}
+
+	{
+		mDestTex = gl::TextureCubeMap::create(cubeMapSide, cubeMapSide, colorTextureFormat);
+		glGenFramebuffers(1, & mDestFbo);
+		gl::ScopedFramebuffer scpFbo(GL_FRAMEBUFFER, mDestFbo);
+		glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, mDestTex->getId(), 0);
+		glDrawBuffers(1, drawBuffers);
+		gl::clear(Color(0, 1, 0)); // Clear to all "A"
+	}
+
+	mRDProgram = gl::GlslProg::create(loadAsset("reactionDiffusion_v.glsl"), loadAsset("reactionDiffusion_f.glsl"), loadAsset("reactionDiffusion_g.glsl"));
+	mRDProgram->uniform("gridSideLength", cubeMapSide);
+	mRDProgram->uniform("uPrevFrame", mRDReadFboBinding);
+	uploadRates(availableTypes[mInitialType]);
 
 	mCamera.lookAt(vec3(0, 0, 4), vec3(0), vec3(0, 1, 0));
 	mCameraUi = CameraUi(& mCamera, getWindow());
 
-	mRDProgram = gl::GlslProg::create(loadAsset("reactionDiffusionPassThrough_v.glsl"), loadAsset("reactionDiffusion_f.glsl"));
-	mRDProgram->uniform("gridSideLength", cubeMapSide);
-	mRDProgram->uniform("uPrevFrame", mRDReadFboBinding);
-
-	uploadRates(availableTypes[mInitialType]);
+	{
+		vec3 pointBuf[1] = { vec3(cubeMapSide / 2, cubeMapSide / 2, 0) };
+		auto pointVbo = gl::Vbo::create(GL_ARRAY_BUFFER, sizeof(vec3), pointBuf, GL_STATIC_DRAW);
+		auto pointVboLayout = geom::BufferLayout({ geom::AttribInfo(geom::POSITION, 3, 0, 0) });
+		mPointMesh = gl::VboMesh::create(1, GL_POINTS, { { pointVboLayout, pointVbo } });
+	}
 
 	mRenderRDProgram = setupRenderShader();
 	mNormalizedCubeMesh = makeNormalizedCubeSphere();
@@ -147,6 +150,9 @@ void ReactionDiffusionCubeMapApp::setup()
 	setupCircleRD(20);
 	// setupSquareRD(40);
 	// setupRoundedSquareRD(40);
+
+	gl::enableFaceCulling();
+	gl::cullFace(GL_BACK);
 }
 
 gl::GlslProgRef ReactionDiffusionCubeMapApp::setupRenderShader() {
@@ -163,8 +169,9 @@ void ReactionDiffusionCubeMapApp::uploadRates(float * ratePair) {
 void ReactionDiffusionCubeMapApp::update()
 {
 	if (!mPauseSimulation) {
-		gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
 		gl::ScopedDepth scpDepth(false);
+
+		gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
 
 		gl::ScopedMatrices scpMat;
 		gl::setMatricesWindow(cubeMapSide, cubeMapSide);
@@ -173,49 +180,16 @@ void ReactionDiffusionCubeMapApp::update()
 
 		// Update the reaction-diffusion system multiple times per frame to speed things up
 		for (int i = 0; i < updatesPerFrame; i++) {
-			// Bind the source FBO to read the previous state
-			gl::ScopedTextureBind scpTex(mSourceFbo->getTextureCubeMap(), mRDReadFboBinding);
+			// Bind the source texture to read the previous state
+			gl::ScopedTextureBind scpTex(mSourceTex, mRDReadFboBinding);
+			// Bind the destination FBO (with the destination texture attached) to write the new state
+			gl::ScopedFramebuffer scpFbo(GL_FRAMEBUFFER, mDestFbo);
+			
+			// Draw a single point, using the GS to expand this one vertex into the six layers of the CubeMap texture
+			gl::draw(mPointMesh);
 
-			// Update the destination FBO
-			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-			mRDProgram->uniform("cubeFace", 0);
-			gl::clear(Color(0, 0, 0));
-			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
-			// gl::clear(Color(1, 0, 0));
-
-			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
-			mRDProgram->uniform("cubeFace", 1);
-			gl::clear(Color(0, 0, 0));
-			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
-			// gl::clear(Color(0, 1, 1));
-
-			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
-			mRDProgram->uniform("cubeFace", 2);
-			gl::clear(Color(0, 0, 0));
-			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
-			// gl::clear(Color(0, 1, 0));
-
-			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
-			mRDProgram->uniform("cubeFace", 3);
-			gl::clear(Color(0, 0, 0));
-			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
-			// gl::clear(Color(1, 0, 1));
-
-			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
-			mRDProgram->uniform("cubeFace", 4);
-			gl::clear(Color(0, 0, 0));
-			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
-			// gl::clear(Color(0, 0, 1));
-
-			mDestFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
-			mRDProgram->uniform("cubeFace", 5);
-			gl::clear(Color(0, 0, 0));
-			gl::drawSolidRect(Rectf(0, 0, cubeMapSide, cubeMapSide));
-			// gl::clear(Color(1, 1, 0));
-
-			mDestFbo->unbindFramebuffer();
-
-			// Swap the source and destination FBOs for the next frame
+			// Swap both the Texture pointers and the Fbo IDs to ping pong the buffers
+			std::swap(mSourceTex, mDestTex);
 			std::swap(mSourceFbo, mDestFbo);
 		}
 	}
@@ -225,7 +199,6 @@ void ReactionDiffusionCubeMapApp::draw()
 {
 	{
 		gl::ScopedDepth scpDepth(true);
-		gl::ScopedFaceCulling scpFace(true, GL_BACK);
 
 		gl::ScopedMatrices scpMat;
 		gl::setMatrices(mCamera);
@@ -233,7 +206,7 @@ void ReactionDiffusionCubeMapApp::draw()
 		gl::clear(Color(0, 0, 0));
 		
 		// // Draws the reaction-diffusion Cubemap on the sphere
-		gl::ScopedTextureBind scpTex(mDestFbo->getTextureCubeMap(), mRDRenderTextureBinding);
+		gl::ScopedTextureBind scpTex(mDestTex, mRDRenderTextureBinding);
 
 		mNormalizedCubeBatch->draw();
 	}
@@ -262,57 +235,62 @@ void ReactionDiffusionCubeMapApp::keyUp(KeyEvent evt) {
 	}
 }
 
-void ReactionDiffusionCubeMapApp::drawVectorToFBO(std::vector<Color> const & pixelBuffer) {
-	auto initTexFmt = gl::Texture2d::Format().dataType(GL_FLOAT).internalFormat(GL_RGB32F);
-	auto initTexture = gl::Texture2d::create(pixelBuffer.data(), GL_RGB, cubeMapSide, cubeMapSide, initTexFmt);
+// void ReactionDiffusionCubeMapApp::drawVectorToFBO(std::vector<Color> const & pixelBuffer) {
+// 	auto initTexFmt = gl::Texture2d::Format().dataType(GL_FLOAT).internalFormat(GL_RGB32F);
+// 	auto initTexture = gl::Texture2d::create(pixelBuffer.data(), GL_RGB, cubeMapSide, cubeMapSide, initTexFmt);
 
-	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
-	gl::ScopedDepth scpDepth(false);
+// 	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+// 	gl::ScopedDepth scpDepth(false);
 
-	gl::ScopedMatrices scpMat;
-	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
+// 	gl::ScopedMatrices scpMat;
+// 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
 
-	mSourceFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+// 	mSourceFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
 
-	gl::draw(initTexture, Rectf(0, 0, cubeMapSide, cubeMapSide));
+// 	gl::draw(initTexture, Rectf(0, 0, cubeMapSide, cubeMapSide));
 
-	mSourceFbo->unbindFramebuffer();
-}
+// 	mSourceFbo->unbindFramebuffer();
+// }
 
-void ReactionDiffusionCubeMapApp::setupRoundedSquareRD(float side) {
-	vec2 center(cubeMapSide / 2.0f, cubeMapSide / 2.0f);
-	float halfSide = side / 2.0f;
+// void ReactionDiffusionCubeMapApp::setupRoundedSquareRD(float side) {
+// 	vec2 center(cubeMapSide / 2.0f, cubeMapSide / 2.0f);
+// 	float halfSide = side / 2.0f;
 
-	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
-	gl::ScopedDepth scpDepth(false);
+// 	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+// 	gl::ScopedDepth scpDepth(false);
 
-	gl::ScopedMatrices scpMat;
-	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
+// 	gl::ScopedMatrices scpMat;
+// 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
 
-	mSourceFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+// 	mSourceFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
 
-	// Clear to all A
-	gl::clear(Color(0, 1, 0));
+// 	// Clear to all A
+// 	gl::clear(Color(0, 1, 0));
 
-	// Initial state in a certain area is all B
-	gl::ScopedColor scpC(Color(0, 0, 1));
+// 	// Initial state in a certain area is all B
+// 	gl::ScopedColor scpC(Color(0, 0, 1));
 
-	// Not sure why setting line width here doesn't work... seems a bit like a bug to me :(
-	// I think the reason why this doesn't work is because modern systems don't support glLineWidth any more... :(
-	gl::ScopedLineWidth scpLW(8.0f);
-	gl::drawStrokedRoundedRect(Rectf(center.x - halfSide, center.y - halfSide, center.x + halfSide, center.y + halfSide), 10);
+// 	// Not sure why setting line width here doesn't work... seems a bit like a bug to me :(
+// 	// I think the reason why this doesn't work is because modern systems don't support glLineWidth any more... :(
+// 	gl::ScopedLineWidth scpLW(8.0f);
+// 	gl::drawStrokedRoundedRect(Rectf(center.x - halfSide, center.y - halfSide, center.x + halfSide, center.y + halfSide), 10);
 
-	mSourceFbo->unbindFramebuffer();
-}
+// 	mSourceFbo->unbindFramebuffer();
+// }
 
 void ReactionDiffusionCubeMapApp::setupCircleRD(float rad) {
 	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
-	gl::ScopedDepth scpDepth(false);
-
 	gl::ScopedMatrices scpMat;
 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
 
-	mSourceFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+	GLuint tempFbo;
+	glGenFramebuffers(1, & tempFbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, tempFbo);
+
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_Z, mSourceTex->getId(), 0);
+
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
+	glDrawBuffers(1, drawBuffers);
 
 	gl::clear(Color(0, 1, 0));
 
@@ -320,30 +298,31 @@ void ReactionDiffusionCubeMapApp::setupCircleRD(float rad) {
 
 	gl::drawStrokedCircle(vec2(cubeMapSide / 2.0f, cubeMapSide / 2.0f), rad, 8.0f);
 
-	mSourceFbo->unbindFramebuffer();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glDeleteFramebuffers(1, & tempFbo);
 }
 
-void ReactionDiffusionCubeMapApp::setupSquareRD(float side) {
-	vec2 center(cubeMapSide / 2.0f, cubeMapSide / 2.0f);
-	float halfSide = side / 2.0f;
+// void ReactionDiffusionCubeMapApp::setupSquareRD(float side) {
+// 	vec2 center(cubeMapSide / 2.0f, cubeMapSide / 2.0f);
+// 	float halfSide = side / 2.0f;
 
-	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
-	gl::ScopedDepth scpDepth(false);
+// 	gl::ScopedViewport scpView(0, 0, cubeMapSide, cubeMapSide);
+// 	gl::ScopedDepth scpDepth(false);
 
-	gl::ScopedMatrices scpMat;
-	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
+// 	gl::ScopedMatrices scpMat;
+// 	gl::setMatricesWindow(cubeMapSide, cubeMapSide);
 
-	mSourceFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+// 	mSourceFbo->bindFramebufferFace(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
 
-	// All A
-	gl::clear(Color(0, 1, 0));
+// 	// All A
+// 	gl::clear(Color(0, 1, 0));
 
-	// All B
-	gl::ScopedColor scpC(Color(0, 0, 1));
+// 	// All B
+// 	gl::ScopedColor scpC(Color(0, 0, 1));
 
-	gl::drawStrokedRect(Rectf(center.x - halfSide, center.y - halfSide, center.x + halfSide, center.y + halfSide), 8);
+// 	gl::drawStrokedRect(Rectf(center.x - halfSide, center.y - halfSide, center.x + halfSide, center.y + halfSide), 8);
 
-	mSourceFbo->unbindFramebuffer();
-}
+// 	mSourceFbo->unbindFramebuffer();
+// }
 
 CINDER_APP( ReactionDiffusionCubeMapApp, RendererGl, & ReactionDiffusionCubeMapApp::prepSettings )

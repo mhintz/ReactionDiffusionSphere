@@ -1,9 +1,9 @@
-#version 330
+#version 410
 
-in vec3 CubeMapTexCoord;
+in highp vec3 CubeMapTexCoord;
+flat in highp vec3 Xinc;
+flat in highp vec3 Yinc;
 
-uniform int cubeFace;
-uniform int gridSideLength;
 uniform samplerCube uPrevFrame;
 
 out vec4 FragColor;
@@ -46,50 +46,20 @@ uniform float killRateB;
 // const float diffusionRateA = 0.4;
 // const float diffusionRateB = 0.05;
 
-vec4[6] colors = vec4[](
-  vec4(1, 0, 0, 1),
-  vec4(0, 1, 0, 1),
-  vec4(0, 0, 1, 1),
-  vec4(1, 1, 0, 1),
-  vec4(1, 0, 1, 1),
-  vec4(0, 1, 1, 1)
-);
-
-vec3[6] vertIncs = vec3[](
-  vec3(0, 1, 0),
-  vec3(0, 1, 0),
-  vec3(0, 0, 1),
-  vec3(0, 0, 1),
-  vec3(0, 1, 0),
-  vec3(0, 1, 0)
-);
-
-vec3[6] horIncs = vec3[](
-  vec3(0, 0, 1),
-  vec3(0, 0, 1),
-  vec3(1, 0, 0),
-  vec3(1, 0, 0),
-  vec3(1, 0, 0),
-  vec3(1, 0, 0)
-);
-
 float max3(vec3 val) {
   return max(max(val.x, val.y), val.z);
 }
 
 void main() {
-  highp vec3 xinc = horIncs[cubeFace] / gridSideLength;
-  highp vec3 yinc = vertIncs[cubeFace] / gridSideLength;
-
-  vec4 ul = texture(uPrevFrame, normalize(CubeMapTexCoord - xinc + yinc));
-  vec4 u = texture(uPrevFrame, normalize(CubeMapTexCoord + yinc));
-  vec4 ur = texture(uPrevFrame, normalize(CubeMapTexCoord + xinc + yinc));
-  vec4 l = texture(uPrevFrame, normalize(CubeMapTexCoord - xinc));
+  vec4 ul = texture(uPrevFrame, normalize(CubeMapTexCoord - Xinc + Yinc));
+  vec4 u = texture(uPrevFrame, normalize(CubeMapTexCoord + Yinc));
+  vec4 ur = texture(uPrevFrame, normalize(CubeMapTexCoord + Xinc + Yinc));
+  vec4 l = texture(uPrevFrame, normalize(CubeMapTexCoord - Xinc));
   vec4 cur = texture(uPrevFrame, normalize(CubeMapTexCoord));
-  vec4 r = texture(uPrevFrame, normalize(CubeMapTexCoord + xinc));
-  vec4 bl = texture(uPrevFrame, normalize(CubeMapTexCoord - xinc - yinc));
-  vec4 b = texture(uPrevFrame, normalize(CubeMapTexCoord - yinc));
-  vec4 br = texture(uPrevFrame, normalize(CubeMapTexCoord + xinc - yinc));
+  vec4 r = texture(uPrevFrame, normalize(CubeMapTexCoord + Xinc));
+  vec4 bl = texture(uPrevFrame, normalize(CubeMapTexCoord - Xinc - Yinc));
+  vec4 b = texture(uPrevFrame, normalize(CubeMapTexCoord - Yinc));
+  vec4 br = texture(uPrevFrame, normalize(CubeMapTexCoord + Xinc - Yinc));
 
   float curA = cur.g;
   float curB = cur.b;
@@ -104,6 +74,6 @@ void main() {
 
   // FragColor = vec4(1.0, 0.0, 0.0, 1.0);
   // FragColor = texture(uPrevFrame, CubeMapTexCoord);
-  // FragColor = vec4((CubeMapTexCoord / max3(abs(CubeMapTexCoord))), 1);
+  // FragColor = vec4(CubeMapTexCoord, 1);
   FragColor = vec4(0.0, newA, newB, 1.0);
 }
