@@ -51,15 +51,15 @@ float max3(vec3 val) {
 }
 
 void main() {
-  vec4 ul = texture(uPrevFrame, normalize(CubeMapTexCoord - Xinc + Yinc));
-  vec4 u = texture(uPrevFrame, normalize(CubeMapTexCoord + Yinc));
-  vec4 ur = texture(uPrevFrame, normalize(CubeMapTexCoord + Xinc + Yinc));
-  vec4 l = texture(uPrevFrame, normalize(CubeMapTexCoord - Xinc));
-  vec4 cur = texture(uPrevFrame, normalize(CubeMapTexCoord));
-  vec4 r = texture(uPrevFrame, normalize(CubeMapTexCoord + Xinc));
-  vec4 bl = texture(uPrevFrame, normalize(CubeMapTexCoord - Xinc - Yinc));
-  vec4 b = texture(uPrevFrame, normalize(CubeMapTexCoord - Yinc));
-  vec4 br = texture(uPrevFrame, normalize(CubeMapTexCoord + Xinc - Yinc));
+  vec4 ul = texture(uPrevFrame, CubeMapTexCoord - Xinc + Yinc);
+  vec4 u = texture(uPrevFrame, CubeMapTexCoord + Yinc);
+  vec4 ur = texture(uPrevFrame, CubeMapTexCoord + Xinc + Yinc);
+  vec4 l = texture(uPrevFrame, CubeMapTexCoord - Xinc);
+  vec4 cur = texture(uPrevFrame, CubeMapTexCoord);
+  vec4 r = texture(uPrevFrame, CubeMapTexCoord + Xinc);
+  vec4 bl = texture(uPrevFrame, CubeMapTexCoord - Xinc - Yinc);
+  vec4 b = texture(uPrevFrame, CubeMapTexCoord - Yinc);
+  vec4 br = texture(uPrevFrame, CubeMapTexCoord + Xinc - Yinc);
 
   float curA = cur.g;
   float curB = cur.b;
@@ -75,5 +75,6 @@ void main() {
   // FragColor = vec4(1.0, 0.0, 0.0, 1.0);
   // FragColor = texture(uPrevFrame, CubeMapTexCoord);
   // FragColor = vec4(CubeMapTexCoord, 1);
+  // FragColor = vec4(normalize(CubeMapTexCoord), 1);
   FragColor = vec4(0.0, newA, newB, 1.0);
 }

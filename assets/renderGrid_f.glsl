@@ -126,5 +126,7 @@ void main() {
   // float val = pow(map01(root2, 0, length(toCenter)), 0.5);
   // baseColor = vec3(val, val, val);
 
+  // baseColor = texture(uGridSampler, CubeMapTexCoord).rgb;
+
   FragColor = vec4(baseColor, 1.0);
 }
