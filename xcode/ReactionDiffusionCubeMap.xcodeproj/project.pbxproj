@@ -26,6 +26,7 @@
 		EF19BD231E0AE82000EF88AD /* DoubleFbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF19BD211E0AE82000EF88AD /* DoubleFbo.cpp */; };
 		EF7BC5301E1AA0510061ADF9 /* reactionDiffusion_g.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7BC52E1E1AA0510061ADF9 /* reactionDiffusion_g.glsl */; };
 		EF7BC5311E1AA0510061ADF9 /* reactionDiffusion_v.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EF7BC52F1E1AA0510061ADF9 /* reactionDiffusion_v.glsl */; };
+		EF7BC5341E1F26F30061ADF9 /* FboCubeMapLayered.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7BC5321E1F26F30061ADF9 /* FboCubeMapLayered.cpp */; };
 		EF7E4EDA1DFDBD7C00AE6B47 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ECF1DFDBD7C00AE6B47 /* Mesh.cpp */; };
 		EF7E4EDB1DFDBD7C00AE6B47 /* MeshBuilds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED11DFDBD7C00AE6B47 /* MeshBuilds.cpp */; };
 		EF7E4EDC1DFDBD7C00AE6B47 /* MeshGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF7E4ED31DFDBD7C00AE6B47 /* MeshGroup.cpp */; };
@@ -68,6 +69,8 @@
 		EF19BD221E0AE82000EF88AD /* DoubleFbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DoubleFbo.h; path = "../../../cinder/blocks/core-util/DoubleFbo.h"; sourceTree = "<group>"; };
 		EF7BC52E1E1AA0510061ADF9 /* reactionDiffusion_g.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reactionDiffusion_g.glsl; sourceTree = "<group>"; };
 		EF7BC52F1E1AA0510061ADF9 /* reactionDiffusion_v.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reactionDiffusion_v.glsl; sourceTree = "<group>"; };
+		EF7BC5321E1F26F30061ADF9 /* FboCubeMapLayered.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FboCubeMapLayered.cpp; path = "../../../cinder/blocks/core-util/FboCubeMapLayered.cpp"; sourceTree = "<group>"; };
+		EF7BC5331E1F26F30061ADF9 /* FboCubeMapLayered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FboCubeMapLayered.h; path = "../../../cinder/blocks/core-util/FboCubeMapLayered.h"; sourceTree = "<group>"; };
 		EF7E4ECC1DFDBD7C00AE6B47 /* buildmesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildmesh.h; sourceTree = "<group>"; };
 		EF7E4ECE1DFDBD7C00AE6B47 /* MathBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathBase.h; sourceTree = "<group>"; };
 		EF7E4ECF1DFDBD7C00AE6B47 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 		BB480A83CF864399952EF5CD /* core-util */ = {
 			isa = PBXGroup;
 			children = (
+				EF7BC5321E1F26F30061ADF9 /* FboCubeMapLayered.cpp */,
+				EF7BC5331E1F26F30061ADF9 /* FboCubeMapLayered.h */,
 				EF19BD211E0AE82000EF88AD /* DoubleFbo.cpp */,
 				EF19BD221E0AE82000EF88AD /* DoubleFbo.h */,
 				D0CC7BB0C40148329629F3C5 /* CoreMath.h */,
@@ -319,6 +324,7 @@
 			files = (
 				18308C46C7F6488FBD64266F /* ReactionDiffusionCubeMapApp.cpp in Sources */,
 				EF7E4EDB1DFDBD7C00AE6B47 /* MeshBuilds.cpp in Sources */,
+				EF7BC5341E1F26F30061ADF9 /* FboCubeMapLayered.cpp in Sources */,
 				CF2D8F5038024DF78467F7CD /* CoreMath.cpp in Sources */,
 				EF19BD231E0AE82000EF88AD /* DoubleFbo.cpp in Sources */,
 				9AC3C769B50943469B87D231 /* GeomEater.cpp in Sources */,
